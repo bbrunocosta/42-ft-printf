@@ -1,0 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   normalize_minus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bcosta-b <bcosta-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/18 16:55:02 by bcosta-b          #+#    #+#             */
+/*   Updated: 2025/08/18 17:02:32 by bcosta-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "normalizers.h"
+#include "stringft.h"
+
+size_t	get_content_len(t_list *lst);
+void	pad_content_start(t_printf_context *context, char c, size_t len);
+void	pad_content_end(t_printf_context *context, char c, size_t len);
+
+void	normalize_minus(t_printf_context *context)
+{
+	size_t	current_len;
+
+	if (!context->flags[MINUS])
+		return ;
+	current_len = get_content_len(&context->parts);
+	if (current_len >= context->width)
+		return ;
+	pad_content_end(context, ' ', context->width - current_len);
+}
